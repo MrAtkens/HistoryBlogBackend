@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BazarJok.Contracts.Dto\BazarJok.Contracts.Dtos.csproj" />
+    <ProjectReference Include="..\BazarJok.Contracts.Options\BazarJok.Contracts.Options.csproj" />
+    <ProjectReference Include="..\BazarJok.Contracts.ViewModels\BazarJok.Contracts.ViewModels.csproj" />
+    <ProjectReference Include="..\BazarJok.DataAccess.Providers\BazarJok.DataAccess.Providers.csproj" />
+  </ItemGroup>
+
+</Project>
