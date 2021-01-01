@@ -3,48 +3,50 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BazarJok.Api", "BazarJok.Api", "{DD2DD586-DF9D-4018-8866-46F59F78C5B1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Api", "Blog.Api", "{DD2DD586-DF9D-4018-8866-46F59F78C5B1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BazarJok.Contracts", "BazarJok.Contracts", "{FD2CEFD4-115F-4512-9852-DB13D0292289}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Contracts", "Blog.Contracts", "{FD2CEFD4-115F-4512-9852-DB13D0292289}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BazarJok.Contracts.Dtos", "BazarJok.Contracts.Dto\BazarJok.Contracts.Dtos.csproj", "{20F5ECD2-2733-455C-90DE-A2C457A234C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Contracts.Dtos", "BazarJok.Contracts.Dto\Blog.Contracts.Dtos.csproj", "{20F5ECD2-2733-455C-90DE-A2C457A234C0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BazarJok.DataAccess", "BazarJok.DataAccess", "{C4D40FF6-7148-406C-8ADC-781A553FAE16}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.DataAccess", "Blog.DataAccess", "{C4D40FF6-7148-406C-8ADC-781A553FAE16}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BazarJok.DataAccess.Domain", "BazarJok.DataAccess.Domain\BazarJok.DataAccess.Domain.csproj", "{02CDCBDE-6126-43A4-AF1E-76FC8DE97DC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.DataAccess.Domain", "Blog.DataAccess.Domain\Blog.DataAccess.Domain.csproj", "{02CDCBDE-6126-43A4-AF1E-76FC8DE97DC2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BazarJok.DataAccess.Providers", "BazarJok.DataAccess.Providers\BazarJok.DataAccess.Providers.csproj", "{CCDCF0DD-F617-49C2-B441-4A61E3ED3877}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.DataAccess.Providers", "Blog.DataAccess.Providers\Blog.DataAccess.Providers.csproj", "{CCDCF0DD-F617-49C2-B441-4A61E3ED3877}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BazarJok.Services", "BazarJok.Services", "{BD0FE82E-EA75-454F-A4D8-B4B5C6BB2351}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Services", "Blog.Services", "{BD0FE82E-EA75-454F-A4D8-B4B5C6BB2351}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BazarJok.Services.Identity", "BazarJok.Services.Identity\BazarJok.Services.Identity.csproj", "{57B32AF2-EB3F-401E-ABC9-703781AD5494}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Services.Identity", "Blog.Services.Identity\Blog.Services.Identity.csproj", "{57B32AF2-EB3F-401E-ABC9-703781AD5494}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BazarJok.Services.Business", "BazarJok.Services.Business\BazarJok.Services.Business.csproj", "{B394044E-3FB6-4BD0-BBCC-4522C214767F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Services.Business", "Blog.Services.Business\Blog.Services.Business.csproj", "{B394044E-3FB6-4BD0-BBCC-4522C214767F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BazarJok.Contracts.ViewModels", "BazarJok.Contracts.ViewModels\BazarJok.Contracts.ViewModels.csproj", "{9CE7D44F-E791-412D-A22B-D8D71D002D1D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Contracts.ViewModels", "Blog.Contracts.ViewModels\Blog.Contracts.ViewModels.csproj", "{9CE7D44F-E791-412D-A22B-D8D71D002D1D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BazarJok.Contracts.Options", "BazarJok.Contracts.Options\BazarJok.Contracts.Options.csproj", "{968E403D-5EA8-4D67-A44B-F43956EB9C73}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Contracts.Options", "Blog.Contracts.Options\Blog.Contracts.Options.csproj", "{968E403D-5EA8-4D67-A44B-F43956EB9C73}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BazarJok.Api.Admin", "BazarJok.Api.Admin\BazarJok.Api.Admin.csproj", "{A8E73CE1-D4C9-4A4F-8EFB-1AB84452B983}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Api.Admin", "Blog.Api.Admin\Blog.Api.Admin.csproj", "{A8E73CE1-D4C9-4A4F-8EFB-1AB84452B983}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BazarJok.Tests", "BazarJok.Tests", "{7B73D3CC-C643-48E5-AF67-35A60E00F513}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blog.Tests", "Blog.Tests", "{7B73D3CC-C643-48E5-AF67-35A60E00F513}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BazarJok.Tests.Api", "BazarJok.Tests.Api\BazarJok.Tests.Api.csproj", "{4978F767-743A-4489-969D-650680C092E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Tests.Api", "Blog.Tests.Api\Blog.Tests.Api.csproj", "{4978F767-743A-4489-969D-650680C092E9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BazarJok.Tests.DataAccess", "BazarJok.Tests.DataAccess\BazarJok.Tests.DataAccess.csproj", "{85C49A45-E056-415E-843A-09522FE8EB84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Tests.DataAccess", "Blog.Tests.DataAccess\Blog.Tests.DataAccess.csproj", "{85C49A45-E056-415E-843A-09522FE8EB84}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BazarJok.Tests.Services", "BazarJok.Tests.Services\BazarJok.Tests.Services.csproj", "{2D8DBC13-2296-4DB0-8C01-CFEC0A16C92F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Tests.Services", "Blog.Tests.Services\Blog.Tests.Services.csproj", "{2D8DBC13-2296-4DB0-8C01-CFEC0A16C92F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BazarJok.DataAccess.Models", "BazarJok.DataAccess.Models\BazarJok.DataAccess.Models.csproj", "{C7B44EA7-2580-4D4E-A736-4C10A789EBE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.DataAccess.Models", "Blog.DataAccess.Models\Blog.DataAccess.Models.csproj", "{C7B44EA7-2580-4D4E-A736-4C10A789EBE8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{E4714904-508C-49B8-9FD3-6215715AC071}"
 	ProjectSection(SolutionItems) = preProject
 		Configuration\appsettings.CoreConfigurations.json = Configuration\appsettings.CoreConfigurations.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BazarJok.Contracts.Attributes", "BazarJok.Contracts.Attributes\BazarJok.Contracts.Attributes.csproj", "{DB7E1E65-50E6-482E-BA5B-A1726EFFD89F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Contracts.Attributes", "Blog.Contracts.Attributes\Blog.Contracts.Attributes.csproj", "{DB7E1E65-50E6-482E-BA5B-A1726EFFD89F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BazarJok.Api.User", "BazarJok.Api.User\BazarJok.Api.User.csproj", "{7080B217-F162-48FA-BB90-167733AECEE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Api.User", "Blog.Api.User\Blog.Api.User.csproj", "{7080B217-F162-48FA-BB90-167733AECEE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Api.Blog", "Blog.Api.Blog\Blog.Api.Blog.csproj", "{6C83EDEA-32CC-4F67-8A9B-0F5F69D546E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -108,6 +110,10 @@ Global
 		{7080B217-F162-48FA-BB90-167733AECEE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7080B217-F162-48FA-BB90-167733AECEE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7080B217-F162-48FA-BB90-167733AECEE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C83EDEA-32CC-4F67-8A9B-0F5F69D546E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C83EDEA-32CC-4F67-8A9B-0F5F69D546E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C83EDEA-32CC-4F67-8A9B-0F5F69D546E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C83EDEA-32CC-4F67-8A9B-0F5F69D546E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -127,6 +133,7 @@ Global
 		{C7B44EA7-2580-4D4E-A736-4C10A789EBE8} = {C4D40FF6-7148-406C-8ADC-781A553FAE16}
 		{DB7E1E65-50E6-482E-BA5B-A1726EFFD89F} = {FD2CEFD4-115F-4512-9852-DB13D0292289}
 		{7080B217-F162-48FA-BB90-167733AECEE0} = {DD2DD586-DF9D-4018-8866-46F59F78C5B1}
+		{6C83EDEA-32CC-4F67-8A9B-0F5F69D546E0} = {DD2DD586-DF9D-4018-8866-46F59F78C5B1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {118B6F6C-FFAC-4036-815D-49A939A092ED}

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>BazarJok.DataAccess.Providers</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BazarJok.Contracts.Dto\Blog.Contracts.Dtos.csproj" />
+    <ProjectReference Include="..\Blog.DataAccess.Domain\Blog.DataAccess.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
