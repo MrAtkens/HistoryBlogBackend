@@ -1,28 +1,36 @@
-﻿using System;
-using System.Threading.Tasks;
-using BazarJok.Contracts.Dtos;
-using BazarJok.DataAccess.Domain;
+﻿using BazarJok.DataAccess.Domain;
 using BazarJok.DataAccess.Models;
 using BazarJok.DataAccess.Providers.Abstract;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace BazarJok.DataAccess.Providers
 {
-    public abstract class CategoryProvider : EntityProvider<ApplicationContext, Category, Guid>
+    public class CategoryProvider : EntityProvider<ApplicationContext, Category, Guid>
     {
         private readonly ApplicationContext _context;
 
-        protected CategoryProvider(ApplicationContext context) : base(context)
+        public CategoryProvider(ApplicationContext context) : base(context)
         {
-            _context = context;
+            this._context = context;
         }
+
+        public async Task<Category> GetById(Guid id)
+        {
+            return await _context.Categories.Include(category => category.Image).FirstOrDefaultAsync(category => category.Id == id);
+        }
+
+        public async Task<List<Category>> GetAllCategory()
+        {
+            return await _context.Categories.Include(category => category.Image).ToListAsync();
+        }
+
         public async Task<Category> GetByName(string name)
         {
-            var user = await FirstOrDefault(x =>
-                x.Name.ToLower().Equals(name.ToLower()));
-
-            return user ?? throw new ArgumentException("BazarJok.Api.Category is not found");
+            return await FirstOrDefault(x => x.Name.Equals(name)) ??
+                   throw new ArgumentException("No such category in database");
         }
-
-        public abstract Task Add(CategoryCreationDto categoryCreationDto);
     }
 }

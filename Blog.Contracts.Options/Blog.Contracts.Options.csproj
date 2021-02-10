@@ -5,4 +5,8 @@
     <RootNamespace>BazarJok.Contracts.Options</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Blog.DataAccess.Models\Blog.DataAccess.Models.csproj" />
+  </ItemGroup>
+
 </Project>

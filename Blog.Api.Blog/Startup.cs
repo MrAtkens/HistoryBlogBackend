@@ -38,6 +38,7 @@ namespace Blog.Api.Blog
             // Providers
             services.AddTransient<BlogProvider>();
             services.AddTransient<CategoryProvider>();
+            services.AddTransient<ImageProvider>();
 
             // Authentication
             services.Configure<SecretOption>(_configuration.GetSection("Secrets"));
@@ -116,7 +117,7 @@ namespace Blog.Api.Blog
             {
                 o.AddPolicy(CorsOrigins.FrontPolicy, builder =>
                 {
-                    builder.WithOrigins("http://localhost:3000", "http://localhost:4343")
+                    builder.WithOrigins("http://localhost:4343", "http://localhost:3000")
                         .AllowAnyHeader()
                         .WithMethods("GET")
                         .WithMethods("POST")

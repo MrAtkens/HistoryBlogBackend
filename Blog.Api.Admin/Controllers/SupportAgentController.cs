@@ -34,7 +34,7 @@ namespace BazarJok.Api.Admin.Controllers
             if (user is null)
                 return NotFound("Support is not found");
 
-            var supportViewModel = new AdminViewModel { Id = id, Login = user.Login, CreationDate = user.CreationDate };
+            var supportViewModel = new AdminViewModel { Id = id, Login = user.Login, CreationDate = user.CreationDate.ToString("d") };
 
             return Ok(supportViewModel);
         }
@@ -49,7 +49,7 @@ namespace BazarJok.Api.Admin.Controllers
                 {
                     Id = support.Id, 
                     Login = support.Login, 
-                    CreationDate = support.CreationDate
+                    CreationDate = support.CreationDate.ToString("d")
                 }).ToList();
             
             return Ok(supportViewModels);
@@ -70,13 +70,13 @@ namespace BazarJok.Api.Admin.Controllers
                 return NotFound("Support is not found");
             
             support.Login = supportViewModel.Login;
-            support.PasswordHash = BCrypt.Net.BCrypt.HashPassword(supportViewModel.Password);
+            if(supportViewModel.Password != null)
+                support.PasswordHash = BCrypt.Net.BCrypt.HashPassword(supportViewModel.Password);
             await _adminProvider.Edit(support);
             return Ok();
         }
         
         [HttpDelete("{id}")]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(Guid id)
         {
             var support = await _adminProvider.GetById(id);

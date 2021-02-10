@@ -22,9 +22,10 @@ namespace BazarJok.Api.Admin
         public Startup(IConfiguration configuration, IHostEnvironment environment)
         {
             _configuration = new ConfigurationBuilder()
-                     .AddJsonFile("appsettings.json")
-                     .AddJsonFile("appsettings.CoreConfigurations.json")
-                     .Build();
+                .AddJsonFile("appsettings.json")
+                .AddJsonFile($"appsettings.{environment.EnvironmentName}.json")
+                .AddJsonFile("appsettings.CoreConfigurations.json")
+                .Build();
         }
 
 
@@ -46,7 +47,7 @@ namespace BazarJok.Api.Admin
             
             services.AddAntiforgery(options =>
             {
-                options.HeaderName = "__RequestVerificationToken";
+                options.HeaderName = "f17bfca3-9faa-495d-97cc-99fba7bc9862";
             });
             
             services.AddMemoryCache();

@@ -24,6 +24,7 @@ namespace BazarJok.Api.Admin.Controllers
         }
 
         [HttpPost]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> SignIn(LoginAdminViewModel loginUserViewModel)
         {
             try
@@ -39,8 +40,9 @@ namespace BazarJok.Api.Admin.Controllers
             }
         }
 
-        [Authorize]
         [HttpGet]
+        [Authorize]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> GetUserData()
         {
             var admin = await _authenticationService

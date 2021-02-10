@@ -6,6 +6,6 @@ namespace BazarJok.Contracts.ViewModels
     {
         public Guid Id { get; set; }
         public string Login { get; set; }
-        public DateTime CreationDate { get; set; }
+        public string CreationDate { get; set; }
     }
 }

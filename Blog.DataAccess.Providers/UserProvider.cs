@@ -4,26 +4,22 @@ using BazarJok.Contracts.Dtos;
 using BazarJok.DataAccess.Domain;
 using BazarJok.DataAccess.Models;
 using BazarJok.DataAccess.Providers.Abstract;
-
 namespace BazarJok.DataAccess.Providers
 {
-    public abstract class UserProvider<T> : EntityProvider<ApplicationContext, T, Guid> where T: User
+    public class UserProvider: AccountProvider<User>
     {
         private readonly ApplicationContext _context;
-
-        protected UserProvider(ApplicationContext context) : base(context)
+        public UserProvider(ApplicationContext context) : base(context)
         {
             _context = context;
         }
-
-        public async Task<T> GetByEmail(string email)
+        public override async Task Add(UserCreationDto user)
         {
-            var user = await this.FirstOrDefault(x => 
-                x.Email.ToLower().Equals(email.ToLower()));
-
-            return user ?? throw new ArgumentException("User is not found");
+            await this.Add(new User
+            {
+                Email = user.Email,
+                PasswordHash = user.Password
+            });
         }
-
-        public abstract Task Add(UserCreationDto user);
     }
 }

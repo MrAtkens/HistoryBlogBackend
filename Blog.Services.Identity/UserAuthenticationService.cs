@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -15,7 +15,7 @@ namespace BazarJok.Services.Identity
 {
     public class UserAuthenticationService<TUser, TProvider> 
         where TUser : User 
-        where TProvider : UserProvider<TUser>
+        where TProvider : AccountProvider<TUser>
     {
         private readonly TProvider _provider;
 
@@ -46,7 +46,7 @@ namespace BazarJok.Services.Identity
             await _provider.Add(new UserCreationDto
             {
                 Email = newUser.Email,
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(newUser.PasswordHash)
+                Password = BCrypt.Net.BCrypt.HashPassword(newUser.Password)
             });
             
             return GenerateJwtToken(newUser.Email);
@@ -61,10 +61,10 @@ namespace BazarJok.Services.Identity
         /// <param name="password"></param>
         /// <exception cref="ArgumentException">User is not found</exception>
         /// <returns>Jwt token</returns>
-        public async Task<string> Authenticate(string email, string password)
+        public async Task<string> Authenticate(string emailOrPhone, string password)
         {
             // Find data by arguments
-            var user = await _provider.GetByEmail(email);
+            var user = await _provider.GetByEmail(emailOrPhone);
 
             // if user is not found, throw exception
             if (!BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
