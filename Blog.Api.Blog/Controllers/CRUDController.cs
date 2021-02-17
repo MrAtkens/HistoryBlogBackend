@@ -33,7 +33,18 @@ namespace Blog.Api.Blog.Controllers
             var blog = await _blogProvider.GetById(id);
             if (blog is null)
                 return NotFound("Support is not found");
-            return Ok(blog);
+            var blogViewModel = new BlogViewModel()
+            {
+                Id = blog.Id, 
+                Title = blog.Title,
+                Description = blog.Description,
+                Tags = blog.Tags,
+                Category = blog.Category,
+                MainBlogText = blog.MainBlogText,
+                Image = blog.Image,
+                CreationDate = blog.CreationDate.ToString("d")
+            };
+            return Ok(blogViewModel);
         }
 
         [HttpGet]
@@ -42,21 +53,89 @@ namespace Blog.Api.Blog.Controllers
         {
             var blogs = await _blogProvider.GetAllBlogs();
             
-            var supportViewModels = 
-                blogs.Select(support=> new BlogViewModel() 
+            var blogViewModel = 
+                blogs.Select(blog=> new BlogViewModel() 
                 {
-                    Id = support.Id, 
-                    Title = support.Title,
-                    Description = support.Description,
-                    Tags = support.Tags,
-                    Category = support.Category,
-                    MainBlogText = support.MainBlogText,
-                    Image = support.Image,
-                    CreationDate = support.CreationDate.ToString("d")
+                    Id = blog.Id, 
+                    Title = blog.Title,
+                    Description = blog.Description,
+                    Tags = blog.Tags,
+                    Category = blog.Category,
+                    MainBlogText = blog.MainBlogText,
+                    Image = blog.Image,
+                    CreationDate = blog.CreationDate.ToString("d")
                 }).ToList();
             
-            return Ok(supportViewModels);
-            return Ok(blogs);
+            return Ok(blogViewModel);
+        }
+        
+        [HttpPost]
+        [Route("/api/blog/search")]
+        [EnableCors(CorsOrigins.FrontPolicy)]
+        public async Task<IActionResult> Search(BlogFindDto title)
+        {
+            var blogs = await _blogProvider.GetAllBlogsByTitle(title);
+            
+            var blogViewModel = 
+                blogs.Select(blog=> new BlogViewModel() 
+                {
+                    Id = blog.Id, 
+                    Title = blog.Title,
+                    Description = blog.Description,
+                    Tags = blog.Tags,
+                    Category = blog.Category,
+                    MainBlogText = blog.MainBlogText,
+                    Image = blog.Image,
+                    CreationDate = blog.CreationDate.ToString("d")
+                }).ToList();
+            
+            return Ok(blogViewModel);
+        }
+        
+        [HttpPost]
+        [Route("/api/blog/tags")]
+        [EnableCors(CorsOrigins.FrontPolicy)]
+        public async Task<IActionResult> GetAllByTag(BlogFindDto tag)
+        {
+            var blogs = await _blogProvider.GetAllBlogsByTag(tag);
+            
+            var blogViewModel = 
+                blogs.Select(blog=> new BlogViewModel() 
+                {
+                    Id = blog.Id, 
+                    Title = blog.Title,
+                    Description = blog.Description,
+                    Tags = blog.Tags,
+                    Category = blog.Category,
+                    MainBlogText = blog.MainBlogText,
+                    Image = blog.Image,
+                    CreationDate = blog.CreationDate.ToString("d")
+                }).ToList();
+            
+            return Ok(blogViewModel);
+        }
+        
+        [HttpPost]
+        [Route("/api/blog/category")]
+        [EnableCors(CorsOrigins.FrontPolicy)]
+        public async Task<IActionResult> GetAllByCategory(BlogFindDto category)
+        {
+            var blogs = await _blogProvider.GetAllBlogsByCategory(category);
+            
+            var blogViewModel = 
+                blogs.Select(blog=> new BlogViewModel() 
+                {
+                    Id = blog.Id, 
+                    Title = blog.Title,
+                    Description = blog.Description,
+                    Tags = blog.Tags,
+                    Category = blog.Category,
+                    MainBlogText = blog.MainBlogText,
+                    Image = blog.Image,
+                    CreationDate = blog.CreationDate.ToString("d")
+                }).ToList();
+            
+            return Ok(blogViewModel);
         }
 
         [HttpPost]

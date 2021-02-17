@@ -3,7 +3,9 @@ using BazarJok.DataAccess.Models;
 using BazarJok.DataAccess.Providers.Abstract;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using BazarJok.Contracts.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 namespace BazarJok.DataAccess.Providers
@@ -27,10 +29,19 @@ namespace BazarJok.DataAccess.Providers
             return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Category).ToListAsync();
         }
 
-        public async Task<Blog> GetByTitle(string title)
+        public async Task<List<Blog>> GetAllBlogsByTag(BlogFindDto tag)
         {
-            return await FirstOrDefault(x => x.Title.Equals(title)) ??
-                   throw new ArgumentException("No such blog in database");
+            return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Category).Where(blog => blog.Tags.Contains(tag.Line)).ToListAsync();
+        }
+        
+        public async Task<List<Blog>> GetAllBlogsByCategory(BlogFindDto category)
+        {
+            return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Category).Where(blog => blog.Category.Name.Equals(category.Line)).ToListAsync();
+        }
+
+        public async Task<List<Blog>> GetAllBlogsByTitle(BlogFindDto title)
+        {
+            return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Category).Where(blog => blog.Title.Contains(title.Line)).ToListAsync();
         }
     }
 }
