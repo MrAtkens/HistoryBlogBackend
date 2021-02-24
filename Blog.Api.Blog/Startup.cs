@@ -38,6 +38,7 @@ namespace Blog.Api.Blog
             // Providers
             services.AddTransient<BlogProvider>();
             services.AddTransient<CategoryProvider>();
+            services.AddTransient<AdminProvider>();
             services.AddTransient<ImageProvider>();
 
             // Authentication

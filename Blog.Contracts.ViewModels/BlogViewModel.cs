@@ -12,6 +12,7 @@ namespace BazarJok.Contracts.ViewModels
         public string Description { get; set; } // Description of blog
         public string MainBlogText { get; set; } // Main text and images in blog
         public Category Category { get; set; }
+        public string AuthorName { get; set; }
         public string Tags { get; set; }
         public Image Image { get; set; }
         public string CreationDate { get; set; }

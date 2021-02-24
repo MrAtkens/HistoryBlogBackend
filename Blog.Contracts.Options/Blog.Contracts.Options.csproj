@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Blog.Contracts.ViewModels\Blog.Contracts.ViewModels.csproj" />
     <ProjectReference Include="..\Blog.DataAccess.Models\Blog.DataAccess.Models.csproj" />
   </ItemGroup>
 

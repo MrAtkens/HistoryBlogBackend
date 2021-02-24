@@ -21,27 +21,37 @@ namespace BazarJok.DataAccess.Providers
         
         public async Task<Blog> GetById(Guid id)
         {
-            return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Category).FirstOrDefaultAsync(category => category.Id == id);
+            return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Author).Include(blog => blog.Category).FirstOrDefaultAsync(category => category.Id == id);
         }
 
         public async Task<List<Blog>> GetAllBlogs()
         {
-            return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Category).ToListAsync();
+            return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Author).Include(blog => blog.Category).ToListAsync();
         }
 
-        public async Task<List<Blog>> GetAllBlogsByTag(BlogFindDto tag)
+        public async Task<List<Blog>> GetFeaturedBlogs()
         {
-            return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Category).Where(blog => blog.Tags.Contains(tag.Line)).ToListAsync();
+            return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Author).Include(blog => blog.Category).Where(blog => blog.IsFeatured.Equals(true)).ToListAsync();
+        }
+
+        public async Task<List<Blog>> GetAllBlogsByTag(string tag)
+        {
+            return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Author).Include(blog => blog.Category).Where(blog => blog.Tags.Contains(tag)).ToListAsync();
         }
         
-        public async Task<List<Blog>> GetAllBlogsByCategory(BlogFindDto category)
+        public async Task<List<Blog>> GetAllBlogsByCategory(string category)
         {
-            return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Category).Where(blog => blog.Category.Name.Equals(category.Line)).ToListAsync();
+            return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Author).Include(blog => blog.Category).Where(blog => blog.Category.Name.Equals(category)).ToListAsync();
         }
 
         public async Task<List<Blog>> GetAllBlogsByTitle(BlogFindDto title)
         {
-            return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Category).Where(blog => blog.Title.Contains(title.Line)).ToListAsync();
+            return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Author).Include(blog => blog.Category).Where(blog => blog.Title.Contains(title.Line)).ToListAsync();
+        }
+        
+        public async Task<List<Blog>> GetBlogsByAuthor(Admin admin)
+        {
+            return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Author).Include(blog => blog.Category).Where(blog => blog.Author == admin).ToListAsync();
         }
     }
 }
