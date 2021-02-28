@@ -21,6 +21,6 @@ namespace BazarJok.Contracts.Dtos
         public string Tags { get; set; }
         
         [Required]
-        public Image Image { get; set; }
+        public ImageDto Image { get; set; }
     }
 }

@@ -43,11 +43,38 @@ namespace BazarJok.Services.Business
             return blog;
         }
 
+        public async Task<List<Blog>> GetLatestBlog()
+        {
+            var blogs = await _blogProvider.GetLatestBlogs();
+            List<Blog> latestBlogs = new List<Blog>();
+            if (blogs.Count < 6)
+            {
+                latestBlogs.Add(blogs[0]);
+                latestBlogs.Add(blogs[1]);
+                latestBlogs.Add(blogs[2]);
+            }
+            else
+            {
+                latestBlogs.Add(blogs[0]);
+                latestBlogs.Add(blogs[1]);
+                latestBlogs.Add(blogs[2]);
+                latestBlogs.Add(blogs[3]);
+                latestBlogs.Add(blogs[4]);
+                latestBlogs.Add(blogs[5]);
+            }
+
+            return latestBlogs;
+        }
+
         public async Task AddBlog(BlogCreationDto blogViewModel)
         {
             Guid id = Guid.NewGuid();
             Category category = await _categoryProvider.GetById(blogViewModel.Category.Id);
             Admin admin = await _adminProvider.GetById(blogViewModel.AuthorId);
+            Image imageNew = new Image();
+            imageNew.Alt = blogViewModel.Image.Alt;
+            imageNew.ImageName = blogViewModel.Image.ImageName;
+            imageNew.WebImagePath = blogViewModel.Image.WebImagePath;
             var blog = new Blog
             {
                 Id = id,
@@ -57,34 +84,54 @@ namespace BazarJok.Services.Business
                 Author = admin,
                 Tags =  blogViewModel.Tags,
                 MainBlogText = blogViewModel.MainBlogText,
-                Image = blogViewModel.Image
+                Image = imageNew
             };
             
-            await _imageProvider.Add(blogViewModel.Image);
+            await _imageProvider.Add(imageNew);
             await _blogProvider.Add(blog);
             _cache.Set(blog.Id, blog, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(10)));
         }
 
-        public async Task EditBlog(BlogCreationDto blogViewModel, Blog editBlog)
+        public async Task EditBlog(BlogCreationDto blogCreationDto, Blog editBlog)
         {
-            Category category = await _categoryProvider.GetById(blogViewModel.Category.Id);
+            Category category = await _categoryProvider.GetById(blogCreationDto.Category.Id);
             
-            editBlog.Title = blogViewModel.Title;
-            editBlog.MainBlogText = blogViewModel.MainBlogText;
-            editBlog.Description = blogViewModel.Description;
+            editBlog.Title = blogCreationDto.Title;
+            editBlog.MainBlogText = blogCreationDto.MainBlogText;
+            editBlog.Description = blogCreationDto.Description;
             editBlog.Category = category;
-            editBlog.Tags = blogViewModel.Tags;
+            editBlog.Tags = blogCreationDto.Tags;
             try
             {
-                Image image = await _imageProvider.GetByWebImagePath(blogViewModel.Image.WebImagePath);
-                Console.WriteLine(image);
+                Image image = await _imageProvider.GetByWebImagePath(blogCreationDto.Image.WebImagePath);
+                if (image.Equals(null))
+                {
+                    _cache.Remove(editBlog.Id);
+                    Image imageNew = new Image();
+                    imageNew.Alt = blogCreationDto.Image.Alt;
+                    imageNew.ImageName = blogCreationDto.Image.ImageName;
+                    imageNew.WebImagePath = blogCreationDto.Image.WebImagePath;
+                    await _imageProvider.Remove(editBlog.Image);
+                    await _imageProvider.Add(imageNew);
+                    editBlog.Image = imageNew;
+                }
+                else if (blogCreationDto.Image.Alt != image.Alt)
+                {
+                    image.Alt = blogCreationDto.Image.Alt;
+                    await _imageProvider.Edit(image);
+                    editBlog.Image = image;
+                }
             }
             catch(Exception exception)
             {
-                Console.WriteLine(exception);
+                _cache.Remove(editBlog.Id);
+                Image imageNew = new Image();
+                imageNew.Alt = blogCreationDto.Image.Alt;
+                imageNew.ImageName = blogCreationDto.Image.ImageName;
+                imageNew.WebImagePath = blogCreationDto.Image.WebImagePath;
                 await _imageProvider.Remove(editBlog.Image);
-                await _imageProvider.Add(blogViewModel.Image);
-                editBlog.Image = blogViewModel.Image;
+                await _imageProvider.Add(imageNew);
+                editBlog.Image = imageNew;
             }
             
             await _blogProvider.Edit(editBlog);

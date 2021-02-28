@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Threading.Tasks;
 using BazarJok.Contracts.Attributes;
 using BazarJok.Contracts.Dtos;
@@ -71,8 +70,27 @@ namespace Blog.Api.Blog.Controllers
         public async Task<IActionResult> GetAll()
         {
             var blogs = await _blogProvider.GetAllBlogs();
-            return Ok(BlogGetHelper.getBlogsViewModel(blogs));
+            return Ok(BlogGetHelper.GetBlogsViewModel(blogs));
         }
+        
+        [HttpPost]
+        [Route("/api/blog/page")]
+        [EnableCors(CorsOrigins.FrontPolicy)]
+        public async Task<IActionResult> GetBlogsByPage(BlogsByPage pages)
+        {
+            var blogs = await _blogProvider.GetBlogsByPage(pages);
+            return Ok(BlogGetHelper.GetBlogsViewModel(blogs));
+        }
+        
+        [HttpGet]
+        [Route("/api/blog/count")]
+        [EnableCors(CorsOrigins.FrontPolicy)]
+        public async Task<IActionResult> GetCount()
+        {
+            var count = await _blogProvider.GetPageCount();
+            return Ok(count);
+        }
+        
         
         
         [HttpGet]
@@ -81,7 +99,7 @@ namespace Blog.Api.Blog.Controllers
         public async Task<IActionResult> Search(BlogFindDto title)
         {
             var blogs = await _blogProvider.GetAllBlogsByTitle(title);
-            return Ok(BlogGetHelper.getBlogsViewModel(blogs));
+            return Ok(BlogGetHelper.GetBlogsViewModel(blogs));
         }
         
         [HttpGet]
@@ -90,7 +108,7 @@ namespace Blog.Api.Blog.Controllers
         public async Task<IActionResult> GetAllByTag(string? line)
         {
             var blogs = await _blogProvider.GetAllBlogsByTag(line);
-            return Ok(BlogGetHelper.getBlogsViewModel(blogs));
+            return Ok(BlogGetHelper.GetBlogsViewModel(blogs));
         }
         
         [HttpGet]
@@ -99,7 +117,7 @@ namespace Blog.Api.Blog.Controllers
         public async Task<IActionResult> GetAllByCategory(string? line)
         {
             var blogs = await _blogProvider.GetAllBlogsByCategory(line);
-            return Ok(BlogGetHelper.getBlogsViewModel(blogs));
+            return Ok(BlogGetHelper.GetBlogsViewModel(blogs));
         }
         
         [HttpGet]
@@ -108,7 +126,16 @@ namespace Blog.Api.Blog.Controllers
         public async Task<IActionResult> GetFeaturedBlogs()
         {
             var blogs = await _blogProvider.GetFeaturedBlogs();
-            return Ok(BlogGetHelper.getBlogsViewModel(blogs));
+            return Ok(BlogGetHelper.GetBlogsViewModel(blogs));
+        }
+        
+        [HttpGet]
+        [Route("/api/blog/latest")]
+        [EnableCors(CorsOrigins.FrontPolicy)]
+        public async Task<IActionResult> GetLatestBlogs()
+        {
+            var blogs = await _blogProvider.GetLatestBlogs();
+            return Ok(BlogGetHelper.GetBlogsViewModel(blogs));
         }
         
         [HttpPost]
@@ -147,7 +174,7 @@ namespace Blog.Api.Blog.Controllers
                 }
             }
 
-            return Ok(BlogGetHelper.getBlogsViewModel(blogs));
+            return Ok(BlogGetHelper.GetBlogsViewModel(relatedBlog));
         }
         
         [HttpGet]
@@ -156,9 +183,9 @@ namespace Blog.Api.Blog.Controllers
         public async Task<IActionResult> GetAdminAll()
         {
             var blogs = await _blogProvider.GetAllBlogs();
-            return Ok(BlogGetHelper.getAdminBlogsViewModel(blogs));
+            return Ok(BlogGetHelper.GetBlogsViewModel(blogs));
         }
-        
+
         [HttpGet]
         [Route("/api/blog/author/{id?}")]
         [EnableCors(CorsOrigins.AdminPanelPolicy)]
@@ -166,7 +193,7 @@ namespace Blog.Api.Blog.Controllers
         {
             Admin author = await _adminProvider.GetById(id);
             var blogs = await _blogProvider.GetBlogsByAuthor(author);
-            return Ok(BlogGetHelper.getAdminBlogsViewModel(blogs));
+            return Ok(BlogGetHelper.GetBlogsViewModel(blogs));
         }
 
         [HttpPost]

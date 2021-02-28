@@ -16,6 +16,7 @@ namespace BazarJok.Contracts.ViewModels
         public string Tags { get; set; }
         public Image Image { get; set; }
         public string CreationDate { get; set; }
-
+        public int ViewCount { get; set; }
+        public bool IsFeatured { get; set; }
     }
 }

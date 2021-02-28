@@ -28,6 +28,25 @@ namespace BazarJok.DataAccess.Providers
         {
             return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Author).Include(blog => blog.Category).ToListAsync();
         }
+        
+        public async Task<List<Blog>> GetBlogsByPage(BlogsByPage pages)
+        {
+            if (pages.Page == 1)
+            {
+                return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Author).Include(blog => blog.Category).OrderBy(blog => blog.Title).Take(pages.CountPerPage).ToListAsync();
+            }
+            return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Author).Include(blog => blog.Category).OrderBy(blog => blog.Title).Skip(pages.CountPerPage * (pages.Page-1)).Take(pages.CountPerPage).ToListAsync();
+        }
+        
+        public async Task<int> GetPageCount()
+        {
+            return await _context.Blogs.CountAsync();
+        }
+        
+        public async Task<List<Blog>> GetLatestBlogs()
+        {
+            return await _context.Blogs.Include(blog => blog.Image).Include(blog => blog.Author).Include(blog => blog.Category).OrderBy(blog => blog.CreationDate).Take(6).ToListAsync();
+        }
 
         public async Task<List<Blog>> GetFeaturedBlogs()
         {
