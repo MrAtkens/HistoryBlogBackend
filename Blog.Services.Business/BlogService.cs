@@ -13,7 +13,6 @@ namespace BazarJok.Services.Business
 {
     public class BlogService
     {
-        private readonly IHostEnvironment _environment;
         private readonly BlogProvider _blogProvider;
         private readonly CategoryProvider _categoryProvider;
         private readonly AdminProvider _adminProvider;
@@ -21,13 +20,12 @@ namespace BazarJok.Services.Business
         private readonly IMemoryCache _cache;
         
 
-        public BlogService(IHostEnvironment environment, BlogProvider blogProvider, CategoryProvider categoryProvider, AdminProvider adminProvider, ImageProvider imageProvider, IMemoryCache cache)
+        public BlogService(BlogProvider blogProvider, CategoryProvider categoryProvider, AdminProvider adminProvider, ImageProvider imageProvider, IMemoryCache cache)
         {
             _blogProvider = blogProvider;
             _categoryProvider = categoryProvider;
             _adminProvider = adminProvider;
             _imageProvider = imageProvider;
-            _environment = environment;
             _cache = cache;
         }
 
@@ -35,6 +33,18 @@ namespace BazarJok.Services.Business
         {
             if (_cache.TryGetValue(id, out Blog blog)) return blog;
             blog = await _blogProvider.GetById(id);
+            if (blog != null)
+            {
+                _cache.Set(blog.Id, blog,
+                    new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(10)));
+            }
+            return blog;
+        }
+        
+        public async Task<Blog> GetByIdAdmin(Guid id)
+        {
+            if (_cache.TryGetValue(id, out Blog blog)) return blog;
+            blog = await _blogProvider.GetByIdAdmin(id);
             if (blog != null)
             {
                 _cache.Set(blog.Id, blog,
@@ -71,10 +81,7 @@ namespace BazarJok.Services.Business
             Guid id = Guid.NewGuid();
             Category category = await _categoryProvider.GetById(blogViewModel.Category.Id);
             Admin admin = await _adminProvider.GetById(blogViewModel.AuthorId);
-            Image imageNew = new Image();
-            imageNew.Alt = blogViewModel.Image.Alt;
-            imageNew.ImageName = blogViewModel.Image.ImageName;
-            imageNew.WebImagePath = blogViewModel.Image.WebImagePath;
+            Image imageNew = new Image(blogViewModel.Image.ImageName, blogViewModel.Image.Alt, blogViewModel.Image.WebImagePath);
             var blog = new Blog
             {
                 Id = id,
@@ -107,11 +114,7 @@ namespace BazarJok.Services.Business
                 if (image.Equals(null))
                 {
                     _cache.Remove(editBlog.Id);
-                    Image imageNew = new Image();
-                    imageNew.Alt = blogCreationDto.Image.Alt;
-                    imageNew.ImageName = blogCreationDto.Image.ImageName;
-                    imageNew.WebImagePath = blogCreationDto.Image.WebImagePath;
-                    await _imageProvider.Remove(editBlog.Image);
+                    Image imageNew = new Image(blogCreationDto.Image.ImageName, blogCreationDto.Image.Alt, blogCreationDto.Image.WebImagePath);
                     await _imageProvider.Add(imageNew);
                     editBlog.Image = imageNew;
                 }
@@ -125,10 +128,7 @@ namespace BazarJok.Services.Business
             catch(Exception exception)
             {
                 _cache.Remove(editBlog.Id);
-                Image imageNew = new Image();
-                imageNew.Alt = blogCreationDto.Image.Alt;
-                imageNew.ImageName = blogCreationDto.Image.ImageName;
-                imageNew.WebImagePath = blogCreationDto.Image.WebImagePath;
+                Image imageNew = new Image(blogCreationDto.Image.ImageName, blogCreationDto.Image.Alt, blogCreationDto.Image.WebImagePath);
                 await _imageProvider.Remove(editBlog.Image);
                 await _imageProvider.Add(imageNew);
                 editBlog.Image = imageNew;
@@ -154,6 +154,13 @@ namespace BazarJok.Services.Business
         public async Task SetIsFeatured(Blog blog)
         {
             blog.IsFeatured = !blog.IsFeatured;
+            await _blogProvider.Edit(blog);
+            _cache.Set(blog.Id, blog, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(10)));
+        }
+        
+        public async Task SetIsAccepted(Blog blog)
+        {
+            blog.IsAccepted = !blog.IsAccepted;
             await _blogProvider.Edit(blog);
             _cache.Set(blog.Id, blog, new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(10)));
         }

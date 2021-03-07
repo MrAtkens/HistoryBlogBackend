@@ -15,6 +15,7 @@ namespace BazarJok.DataAccess.Models
         public String Tags { get; set; }
         public Image Image { get; set; }
         public bool IsFeatured { get; set; } = false;
+        public bool IsAccepted { get; set; } = false;
         public int ViewCount { get; set; } = 0;
     }
 }

@@ -18,5 +18,7 @@ namespace BazarJok.Contracts.ViewModels
         public string CreationDate { get; set; }
         public int ViewCount { get; set; }
         public bool IsFeatured { get; set; }
+        public bool IsAccepted { get; set; }
+
     }
 }

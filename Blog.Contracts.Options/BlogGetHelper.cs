@@ -23,6 +23,7 @@ namespace BazarJok.Contracts.Options
                 CreationDate = blog.CreationDate.ToString("dddd dd MMMM yyyy", 
                     CultureInfo.CreateSpecificCulture("ru-RU")),
                 IsFeatured = blog.IsFeatured,
+                IsAccepted = blog.IsAccepted,
                 ViewCount = blog.ViewCount
             }).ToList();
         }

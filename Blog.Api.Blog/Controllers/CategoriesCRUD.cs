@@ -64,7 +64,7 @@ namespace Blog.Api.Blog.Controllers
                 Name = categoryCreationDto.Name,
                 Description = categoryCreationDto.Description,
                 SortIndex = categoryCreationDto.SortIndex,
-                Image = categoryCreationDto.Image
+                Image = new Image(categoryCreationDto.Image.ImageName, categoryCreationDto.Image.Alt, categoryCreationDto.Image.WebImagePath)
             };
             await _imageProvider.Add(category.Image);
             await _categoryProvider.Add(category);

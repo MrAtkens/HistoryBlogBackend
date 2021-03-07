@@ -38,6 +38,7 @@ namespace Blog.Api.Blog
             // Providers
             services.AddTransient<BlogProvider>();
             services.AddTransient<CategoryProvider>();
+            services.AddTransient<QuoteProvider>();
             services.AddTransient<AdminProvider>();
             services.AddTransient<ImageProvider>();
 
@@ -45,6 +46,8 @@ namespace Blog.Api.Blog
             services.Configure<SecretOption>(_configuration.GetSection("Secrets"));
 
             services.AddTransient<BlogService>();
+            services.AddTransient<QuoteService>();
+
 
             
             services.AddAntiforgery(options =>

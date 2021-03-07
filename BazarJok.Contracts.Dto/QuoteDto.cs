@@ -1,17 +1,16 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using BazarJok.DataAccess.Models;
 
 namespace BazarJok.Contracts.Dtos
 {
-    public class CategoryCreationDto
+    public class QuoteDto
     {
         [Required]
-        public string Name { get; set; }
+        public string FullName { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]
-        public int SortIndex { get; set; }
+        public string Date { get; set; }
         [Required]
-        public ImageDto Image { get; set; }
+        public ImageDto ImageDto { get; set; }
     }
 }

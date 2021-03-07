@@ -58,10 +58,22 @@ namespace Blog.Api.Blog.Controllers
         [EnableCors(CorsOrigins.FrontPolicy)]
         public async Task<IActionResult> SetFeatured(Guid id)
         {
-            var blog = await _blogService.GetById(id);
+            var blog = await _blogService.GetByIdAdmin(id);
             if (blog is null)
-                return NotFound("Support is not found");
+                return NotFound("Blog is not found");
             await _blogService.SetIsFeatured(blog);
+            return Ok();
+        }
+        
+        [HttpGet]
+        [Route("/api/blog/accept/{id?}")]
+        [EnableCors(CorsOrigins.FrontPolicy)]
+        public async Task<IActionResult> SetAccept(Guid id)
+        {
+            var blog = await _blogService.GetByIdAdmin(id);
+            if (blog is null)
+                return NotFound("Blog is not found");
+            await _blogService.SetIsAccepted(blog);
             return Ok();
         }
 
