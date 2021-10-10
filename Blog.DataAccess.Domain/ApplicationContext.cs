@@ -1,11 +1,7 @@
 ﻿using BazarJok.DataAccess.Models.System;
 using GeekBlog.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
 
 namespace GeekBlog.DataAccess.Domain
 {
@@ -39,8 +35,8 @@ namespace GeekBlog.DataAccess.Domain
             var superAdmin = new Admin
             {
                 CreationDate = DateTime.Now,
-                Login = "Zulu",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("123123"),
+                Login = "GeekHistoryGod",
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword("GeekNHistoRY#$#ff232"),
                 Role = AdminRole.Admin
             };
 

@@ -23,7 +23,6 @@ namespace GeekBlog.Api.Admin
         {
             _configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
-                .AddJsonFile($"appsettings.{environment.EnvironmentName}.json")
                 .AddJsonFile("appsettings.CoreConfigurations.json")
                 .Build();
         }
@@ -116,7 +115,7 @@ namespace GeekBlog.Api.Admin
             {
                 o.AddPolicy(CorsOrigins.FrontPolicy, builder =>
                 {
-                    builder.WithOrigins("http://localhost:3000", "http://localhost:4343")
+                    builder.WithOrigins("https://geeknhistory.kz", "http://103.246.146.114:3000", "https://blogpanel.netlify.app")
                         .AllowAnyHeader()
                         .WithMethods("GET")
                         .WithMethods("POST")
@@ -125,7 +124,7 @@ namespace GeekBlog.Api.Admin
 
                 o.AddPolicy(CorsOrigins.AdminPanelPolicy, builder =>
                 {
-                    builder.WithOrigins("http://localhost:4343")
+                    builder.WithOrigins("https://blogpanel.netlify.app")
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials();

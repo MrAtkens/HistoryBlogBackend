@@ -24,7 +24,6 @@ namespace GeekBlog.Api.Admin.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> SignIn(LoginAdminViewModel loginUserViewModel)
         {
             try
@@ -42,7 +41,6 @@ namespace GeekBlog.Api.Admin.Controllers
 
         [HttpGet]
         [Authorize]
-        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> GetUserData()
         {
             var admin = await _authenticationService
