@@ -1,9 +1,9 @@
 ﻿using System;
-using BazarJok.DataAccess.Models;
+using GeekBlog.DataAccess.Models.Enums;
 using Microsoft.AspNetCore.Authorization;
 
 
-namespace BazarJok.Contracts.Attributes
+namespace GeekBlog.Contracts.Attributes
 {
     public sealed class AdminAuthorizedAttribute : AuthorizeAttribute
     {

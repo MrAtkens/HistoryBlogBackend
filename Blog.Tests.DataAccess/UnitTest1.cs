@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace BazarJok.Tests.DataAccess
+namespace GeekBlog.Tests.DataAccess
 {
     public class UnitTest1
     {

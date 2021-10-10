@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
 
-namespace BazarJok.Api.Admin
+namespace GeekBlog.Api.Admin
 {
     public static class Program
     {

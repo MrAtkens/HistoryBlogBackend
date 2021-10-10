@@ -1,7 +1,7 @@
 using System;
 using Xunit;
 
-namespace BazarJok.Tests.Services
+namespace GeekBlog.Tests.Services
 {
     public class UnitTest1
     {

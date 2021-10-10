@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BazarJok.Contracts.ViewModels
+namespace GeekBlog.Contracts.ViewModels
 {
     public class UserViewModel
     {

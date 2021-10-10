@@ -1,12 +1,12 @@
-﻿using BazarJok.DataAccess.Domain;
-using BazarJok.DataAccess.Models;
-using BazarJok.DataAccess.Providers.Abstract;
+﻿using GeekBlog.DataAccess.Domain;
+using GeekBlog.DataAccess.Models;
+using GeekBlog.DataAccess.Providers.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace BazarJok.DataAccess.Providers
+namespace GeekBlog.DataAccess.Providers
 {
     public class CategoryProvider : EntityProvider<ApplicationContext, Category, Guid>
     {

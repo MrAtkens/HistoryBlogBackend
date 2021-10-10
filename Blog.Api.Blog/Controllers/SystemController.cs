@@ -2,9 +2,8 @@
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using BazarJok.Contracts.Dtos;
-using BazarJok.Contracts.Options;
-using BazarJok.Contracts.ViewModels;
+using GeekBlog.Contracts.Dtos;
+using GeekBlog.Contracts.Options;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 

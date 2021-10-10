@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using BazarJok.Contracts.Attributes;
-using BazarJok.Contracts.Dtos;
-using BazarJok.Contracts.Options;
-using BazarJok.Contracts.ViewModels;
-using BazarJok.DataAccess.Models;
-using BazarJok.DataAccess.Providers;
+using GeekBlog.Contracts.Attributes;
+using GeekBlog.Contracts.Dtos;
+using GeekBlog.Contracts.Options;
+using GeekBlog.Contracts.ViewModels;
+using GeekBlog.DataAccess.Models;
+using GeekBlog.DataAccess.Providers;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 

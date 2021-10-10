@@ -1,8 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>BazarJok.DataAccess.Models</RootNamespace>
+    <RootNamespace>GeekBlog.DataAccess.Models</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Blog.Contracts.Options\Blog.Contracts.Options.csproj" />
+  </ItemGroup>
 
 </Project>

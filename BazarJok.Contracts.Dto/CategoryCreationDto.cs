@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using BazarJok.DataAccess.Models;
+using GeekBlog.DataAccess.Models;
 
-namespace BazarJok.Contracts.Dtos
+namespace GeekBlog.Contracts.Dtos
 {
     public class CategoryCreationDto
     {

@@ -1,7 +1,7 @@
-using BazarJok.Contracts.Options;
-using BazarJok.DataAccess.Domain;
-using BazarJok.DataAccess.Providers;
-using BazarJok.Services.Identity;
+using GeekBlog.Contracts.Options;
+using GeekBlog.DataAccess.Domain;
+using GeekBlog.DataAccess.Providers;
+using GeekBlog.Services.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,7 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 
-namespace BazarJok.Api.Admin
+namespace GeekBlog.Api.Admin
 {
     public class Startup
     {
@@ -37,7 +37,7 @@ namespace BazarJok.Api.Admin
                     _configuration.GetConnectionString("DevConnection")));
 
             // Providers
-            services.AddTransient<AdminProvider>();
+            services.AddTransient<EntityAdminProvider>();
 
             // Authentication
             services.Configure<SecretOption>(_configuration.GetSection("Secrets"));
@@ -83,7 +83,7 @@ namespace BazarJok.Api.Admin
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "BazarJok.Admin",
+                    Title = "GeekBlog.Admin",
                     Description = "WebApi",
 
                 });

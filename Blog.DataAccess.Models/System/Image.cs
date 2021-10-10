@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BazarJok.DataAccess.Models
+namespace GeekBlog.DataAccess.Models
 {
     public class Image : Entity
     {

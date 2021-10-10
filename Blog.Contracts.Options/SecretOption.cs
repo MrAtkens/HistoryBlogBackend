@@ -1,4 +1,4 @@
-﻿namespace BazarJok.Contracts.Options
+﻿namespace GeekBlog.Contracts.Options
 {
     public class SecretOption
     {

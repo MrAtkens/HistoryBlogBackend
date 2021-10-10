@@ -1,14 +1,14 @@
-﻿using BazarJok.DataAccess.Domain;
-using BazarJok.DataAccess.Models;
-using BazarJok.DataAccess.Providers.Abstract;
+﻿using GeekBlog.DataAccess.Domain;
+using GeekBlog.DataAccess.Models;
+using GeekBlog.DataAccess.Providers.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BazarJok.Contracts.Dtos;
+using GeekBlog.Contracts.Dtos;
 using Microsoft.EntityFrameworkCore;
 
-namespace BazarJok.DataAccess.Providers
+namespace GeekBlog.DataAccess.Providers
 {
     public class BlogProvider : EntityProvider<ApplicationContext, Blog, Guid>
     {

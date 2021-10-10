@@ -4,24 +4,24 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using BazarJok.Contracts.Dtos;
-using BazarJok.Contracts.Options;
-using BazarJok.DataAccess.Models;
-using BazarJok.DataAccess.Providers;
+using BazarJok.DataAccess.Providers.Abstract;
+using GeekBlog.Contracts.Dtos;
+using GeekBlog.Contracts.Options;
+using GeekBlog.DataAccess.Models;
+using GeekBlog.DataAccess.Models.Enums;
+using GeekBlog.DataAccess.Providers;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace BazarJok.Services.Identity
+namespace GeekBlog.Services.Identity
 {
-    public class UserAuthenticationService<TUser, TProvider> 
-        where TUser : User 
-        where TProvider : AccountProvider<TUser>
+    public class UserAuthenticationService
     {
-        private readonly TProvider _provider;
+        private readonly IUserProvider _provider;
 
         private SecretOption SecretOptions { get; }
 
-        public UserAuthenticationService(TProvider provider, IOptions<SecretOption> secretOptions)
+        public UserAuthenticationService(IUserProvider provider, IOptions<SecretOption> secretOptions)
         {
             SecretOptions = secretOptions.Value;
             this._provider = provider;
@@ -40,19 +40,20 @@ namespace BazarJok.Services.Identity
 
             if (user is not null)
                 throw new ArgumentException("This user is already exists");
-            
-            
+
+
             // Add new user to table
             await _provider.Add(new UserCreationDto
             {
                 Email = newUser.Email,
-                Password = BCrypt.Net.BCrypt.HashPassword(newUser.Password)
+                Password = newUser.Password,
+                Role = newUser.Role
             });
-            
-            return GenerateJwtToken(newUser.Email);
+
+            return GenerateJwtToken(newUser.Email, newUser.Role);
         }
 
-        
+
 
         /// <summary>
         ///     Get Jwt token by exited user
@@ -64,19 +65,16 @@ namespace BazarJok.Services.Identity
         public async Task<string> Authenticate(string emailOrPhone, string password)
         {
             // Find data by arguments
-            var user = await _provider.GetByEmail(emailOrPhone);
+            var user = await _provider.GetByEmailOrPhone(emailOrPhone);
 
             // if user is not found, throw exception
-            if (!BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
+            if (!user.PasswordCheck(password))
                 throw new ArgumentException("Incorrect password");
 
-            return GenerateJwtToken(user.Email);
+            return GenerateJwtToken(user.Email, user.Role);
         }
 
-        
-
-
-        private string GenerateJwtToken(string phone)
+        private string GenerateJwtToken(string email, UserRole role)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(SecretOptions.JwtSecret);
@@ -84,7 +82,8 @@ namespace BazarJok.Services.Identity
             {
                 Subject = new ClaimsIdentity(new[]
                 {
-                    new Claim(ClaimTypes.MobilePhone, phone),
+                    new Claim(ClaimTypes.Email, email),
+                    new Claim(ClaimTypes.Role, role.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
@@ -111,7 +110,10 @@ namespace BazarJok.Services.Identity
             {
                 return new UserClaimsDto()
                 {
-                    Email = claims[0].Value
+                    Email = claims[0].Value,
+                    Role = (UserRole)((Enum.TryParse(typeof(UserRole), claims[1].Value, true, out var role)
+                        ? role
+                        : throw new ArgumentException()) ?? throw new ArgumentException())
                 };
             }
 
@@ -125,11 +127,12 @@ namespace BazarJok.Services.Identity
         /// </summary>
         /// <param name="headers"></param>
         /// <returns></returns>
-        public async Task<TUser> GetUserByHeaders(string[] headers)
+        public async Task<User> GetUserByHeaders(string[] headers)
         {
             var token = headers[0].Replace("Bearer ", "");
 
-            return await _provider.GetByEmail(DecryptToken(token).Email);
+            return await _provider.GetByEmailOrPhone(DecryptToken(token).Email);
         }
     }
+
 }

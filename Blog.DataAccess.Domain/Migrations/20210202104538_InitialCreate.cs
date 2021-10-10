@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace BazarJok.DataAccess.Domain.Migrations
+namespace GeekBlog.DataAccess.Domain.Migrations
 {
     public partial class InitialCreate : Migration
     {

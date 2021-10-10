@@ -1,4 +1,5 @@
-﻿using BazarJok.DataAccess.Models;
+﻿using BazarJok.DataAccess.Models.System;
+using GeekBlog.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -6,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace BazarJok.DataAccess.Domain
+namespace GeekBlog.DataAccess.Domain
 {
     public sealed class ApplicationContext : DbContext
     {
@@ -28,6 +29,7 @@ namespace BazarJok.DataAccess.Domain
         public DbSet<Admin> Admins { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Blog> Blogs { get; set; }
+        public DbSet<Tag> Tags { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Quote> Quotes { get; set; }
@@ -46,6 +48,10 @@ namespace BazarJok.DataAccess.Domain
 
             modelBuilder.Entity<Admin>()
                 .HasIndex(a => a.Login)
+                .IsUnique();
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email)
                 .IsUnique();
         }
     }

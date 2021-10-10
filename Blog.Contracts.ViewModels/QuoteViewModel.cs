@@ -1,7 +1,7 @@
 ﻿using System;
-using BazarJok.DataAccess.Models;
+using GeekBlog.DataAccess.Models;
 
-namespace BazarJok.Contracts.ViewModels
+namespace GeekBlog.Contracts.ViewModels
 {
     public class QuoteViewModel
     {

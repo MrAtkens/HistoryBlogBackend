@@ -1,5 +1,4 @@
-﻿using BazarJok.Contracts.Options;
-using BazarJok.DataAccess.Providers;
+﻿using GeekBlog.Contracts.Options;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -8,28 +7,33 @@ using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using BazarJok.DataAccess.Models;
-using BazarJok.Contracts.Dtos;
-using Microsoft.Extensions.Caching.Memory;
+using GeekBlog.DataAccess.Models;
+using GeekBlog.Contracts.Dtos;
+using GeekBlog.DataAccess.Models.Enums;
+using BazarJok.DataAccess.Providers.Abstract;
 
-namespace BazarJok.Services.Identity
+namespace GeekBlog.Services.Identity
 {
     public class AdminAuthenticationService
     {
-        private readonly AdminProvider _adminProvider;
-        private readonly IMemoryCache _cache;
+        private readonly IAdminProvider _adminProvider;
 
         private SecretOption SecretOptions { get; }
 
-        public AdminAuthenticationService(AdminProvider adminProvider, IMemoryCache cache, IOptions<SecretOption> secretOptions)
+        public AdminAuthenticationService(IAdminProvider adminProvider, IOptions<SecretOption> secretOptions)
         {
             SecretOptions = secretOptions.Value;
-            _cache = cache;
-            _adminProvider = adminProvider;
+            this._adminProvider = adminProvider;
         }
 
 
-        
+        /// <summary>
+        ///     Get Jwt token by exited user
+        /// </summary>
+        /// <param name="login"></param>
+        /// <param name="password"></param>
+        /// <exception cref="ArgumentException">User is not found</exception>
+        /// <returns>Jwt token</returns>
         public async Task<string> Authenticate(string login, string password)
         {
             // Find data by arguments
@@ -41,19 +45,6 @@ namespace BazarJok.Services.Identity
 
             return GenerateJwtToken(admin.Login, admin.Role);
         }
-
-        public async Task AddEditor(string login, string password)
-        {
-            var support = new Admin
-            {
-                Login = login,
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword(password),
-                Role = AdminRole.Editor
-            };
-
-            await _adminProvider.Add(support);
-        }
-
 
         private string GenerateJwtToken(string login, AdminRole role)
         {
@@ -73,7 +64,14 @@ namespace BazarJok.Services.Identity
             var securityToken = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(securityToken);
         }
-        
+
+
+        /// <summary>
+        ///    Token decryption
+        /// </summary>
+        /// <param name="token"></param>
+        /// <exception cref="ArgumentException">throws when could not parse claims</exception>
+        /// <returns>Owner's data</returns>
         private AdminClaimsDto DecryptToken(string token)
         {
             var handler = new JwtSecurityTokenHandler();
@@ -86,19 +84,30 @@ namespace BazarJok.Services.Identity
                 {
                     Login = claims[0].Value,
                     Role = (AdminRole)((Enum.TryParse(typeof(AdminRole), claims[1].Value, true, out var role)
-                        ? role : throw new ArgumentException()) ?? throw new ArgumentException())
+                        ? role
+                        : throw new ArgumentException()) ?? throw new ArgumentException())
                 };
             }
 
             throw new ArgumentException();
         }
 
+        /// <summary>
+        /// Gets Admin by headers from Request
+        /// Usage in controllers: 
+        /// GetAdminByHeaders(Request.Headers[HeaderNames.Authorization].ToArray())
+        /// </summary>
+        /// <param name="headers"></param>
+        /// <returns></returns>
         public async Task<Admin> GetAdminByHeaders(string[] headers)
         {
             var token = headers[0].Replace("Bearer ", "");
 
-            return await _adminProvider.GetByLogin(DecryptToken(token).Login);
+            var result = await _adminProvider.GetByLogin(DecryptToken(token).Login);
+
+            return result;
         }
 
     }
+
 }

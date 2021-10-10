@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BazarJok.Contracts.ViewModels
+namespace GeekBlog.Contracts.ViewModels
 {
     public class RegisterUserViewModel
     {

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using BazarJok.Contracts.Attributes;
-using BazarJok.Contracts.Options;
-using BazarJok.Contracts.ViewModels;
-using BazarJok.DataAccess.Models;
-using BazarJok.DataAccess.Providers;
-using BazarJok.Services.Identity;
+using GeekBlog.Contracts.Attributes;
+using GeekBlog.Contracts.Options;
+using GeekBlog.Contracts.ViewModels;
+using GeekBlog.DataAccess.Models.Enums;
+using GeekBlog.DataAccess.Providers;
+using GeekBlog.DataAccess.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BazarJok.Api.Admin.Controllers
+namespace GeekBlog.Api.Admin.Controllers
 {
     [Route("api/supportAgent/")]
     [AdminAuthorized(roles:AdminRole.Admin)]
@@ -18,13 +18,11 @@ namespace BazarJok.Api.Admin.Controllers
     [ApiController]
     public class SupportAgentController : ControllerBase
     {
-        private readonly AdminProvider _adminProvider;
-        private readonly AdminAuthenticationService _authenticationService;
+        private readonly EntityAdminProvider _adminProvider;
 
-        public SupportAgentController(AdminProvider adminProvider, AdminAuthenticationService authenticationService)
+        public SupportAgentController(EntityAdminProvider adminProvider)
         {
             _adminProvider = adminProvider;
-            _authenticationService = authenticationService;
         }
 
         [HttpGet("{id}")]
@@ -58,7 +56,9 @@ namespace BazarJok.Api.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(SupportViewModel support)
         {
-            await _authenticationService.AddEditor(support.Login, support.Password);
+            DataAccess.Models.Admin admin = new DataAccess.Models.Admin { Login = support.Login,
+                PasswordHash = support.Password };
+            await _adminProvider.Add(admin);
             return Ok();
         }
 

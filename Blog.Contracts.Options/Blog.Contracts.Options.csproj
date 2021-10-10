@@ -1,13 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>BazarJok.Contracts.Options</RootNamespace>
+    <RootNamespace>GeekBlog.Contracts.Options</RootNamespace>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Blog.Contracts.ViewModels\Blog.Contracts.ViewModels.csproj" />
-    <ProjectReference Include="..\Blog.DataAccess.Models\Blog.DataAccess.Models.csproj" />
-  </ItemGroup>
 
 </Project>

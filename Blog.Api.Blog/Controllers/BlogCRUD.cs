@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
-using BazarJok.Contracts.Attributes;
-using BazarJok.Contracts.Dtos;
-using BazarJok.Contracts.Options;
-using BazarJok.Contracts.ViewModels;
-using BazarJok.DataAccess.Models;
-using BazarJok.DataAccess.Providers;
-using BazarJok.Services.Business;
+using GeekBlog.Contracts.Attributes;
+using GeekBlog.Contracts.Dtos;
+using GeekBlog.Contracts.Options;
+using GeekBlog.Contracts.ViewModels;
+using GeekBlog.DataAccess.Models;
+using GeekBlog.DataAccess.Providers;
+using GeekBlog.Services.Business;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -158,7 +158,7 @@ namespace Blog.Api.Blog.Controllers
             var blogs = await _blogProvider.GetAllBlogsByCategory(relatedBlogs.Category);
 
             int index = blogs.FindIndex(blog => blog.Id == relatedBlogs.Id);
-            List<BazarJok.DataAccess.Models.Blog> relatedBlog = new List<BazarJok.DataAccess.Models.Blog>();
+            List<GeekBlog.DataAccess.Models.Blog> relatedBlog = new List<GeekBlog.DataAccess.Models.Blog>();
             if (blogs.Count > 3)
             {
                 if (blogs.Count == index + 1)

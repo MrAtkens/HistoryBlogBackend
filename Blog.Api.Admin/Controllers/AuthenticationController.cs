@@ -1,14 +1,14 @@
-﻿using BazarJok.Contracts.ViewModels;
-using BazarJok.Services.Identity;
+﻿using GeekBlog.Contracts.ViewModels;
+using GeekBlog.Services.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 using System;
 using System.Threading.Tasks;
-using BazarJok.Contracts.Options;
+using GeekBlog.Contracts.Options;
 using Microsoft.AspNetCore.Cors;
 
-namespace BazarJok.Api.Admin.Controllers
+namespace GeekBlog.Api.Admin.Controllers
 {
     [Route("api/auth/[action]")]
     [EnableCors(CorsOrigins.AdminPanelPolicy)]

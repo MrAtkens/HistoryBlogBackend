@@ -1,4 +1,4 @@
-﻿namespace BazarJok.Contracts.ViewModels
+﻿namespace GeekBlog.Contracts.ViewModels
 {
     public class LoginUserViewModel
     {

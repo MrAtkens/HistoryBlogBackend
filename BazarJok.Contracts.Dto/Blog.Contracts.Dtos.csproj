@@ -1,8 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>BazarJok.Contracts.Dtos</RootNamespace>
+    <RootNamespace>GeekBlog.Contracts.Dtos</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

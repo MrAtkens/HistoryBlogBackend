@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BazarJok.Contracts.Dtos
+namespace GeekBlog.Contracts.Dtos
 {
     public class RelatedBlogsDto
     {

@@ -1,7 +1,7 @@
-using BazarJok.Contracts.Options;
-using BazarJok.DataAccess.Domain;
-using BazarJok.DataAccess.Providers;
-using BazarJok.Services.Business;
+using GeekBlog.Contracts.Options;
+using GeekBlog.DataAccess.Domain;
+using GeekBlog.DataAccess.Providers;
+using GeekBlog.Services.Business;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,7 +39,7 @@ namespace Blog.Api.Blog
             services.AddTransient<BlogProvider>();
             services.AddTransient<CategoryProvider>();
             services.AddTransient<QuoteProvider>();
-            services.AddTransient<AdminProvider>();
+            services.AddTransient<EntityAdminProvider>();
             services.AddTransient<ImageProvider>();
 
             // Authentication
@@ -88,7 +88,7 @@ namespace Blog.Api.Blog
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "BazarJok.Blog",
+                    Title = "GeekBlog.Blog",
                     Description = "WebApi",
 
                 });

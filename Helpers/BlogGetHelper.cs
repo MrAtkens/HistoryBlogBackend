@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using GeekBlog.Contracts.ViewModels;
+using GeekBlog.DataAccess.Models;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using BazarJok.Contracts.ViewModels;
-using BazarJok.DataAccess.Models;
 
-namespace BazarJok.Contracts.Options
+namespace GeekBlog.Contracts.Options
 {
     public class BlogGetHelper
     {

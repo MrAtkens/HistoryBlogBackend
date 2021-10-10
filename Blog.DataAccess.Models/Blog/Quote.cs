@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BazarJok.DataAccess.Models
+namespace GeekBlog.DataAccess.Models
 {
     public class Quote : Entity
     {

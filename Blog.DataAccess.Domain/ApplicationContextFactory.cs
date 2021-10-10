@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-namespace BazarJok.DataAccess.Domain
+namespace GeekBlog.DataAccess.Domain
 {
     // This class is a manager, which is makes migrations and different else database manipulations
     // Please, do not use it in a solution

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using BazarJok.DataAccess.Models;
+using BazarJok.DataAccess.Models.System;
+using GeekBlog.DataAccess.Models;
 
-namespace BazarJok.Contracts.Dtos
+namespace GeekBlog.Contracts.Dtos
 {
     public class BlogCreationDto
     {
@@ -18,7 +19,7 @@ namespace BazarJok.Contracts.Dtos
         [Required]
         public Category Category { get; set; }
         [Required] 
-        public string Tags { get; set; }
+        public ICollection<Tag> Tags { get; set; }
         
         [Required]
         public ImageDto Image { get; set; }

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>BazarJok.DataAccess.Providers</RootNamespace>
+    <RootNamespace>GeekBlog.DataAccess.Providers</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

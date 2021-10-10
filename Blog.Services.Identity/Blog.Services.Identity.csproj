@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <LangVersion>preview</LangVersion>
-    <RootNamespace>BazarJok.Services.Identity</RootNamespace>
+    <RootNamespace>GeekBlog.Services.Identity</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,7 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BazarJok.Contracts.Dto\Blog.Contracts.Dtos.csproj" />
     <ProjectReference Include="..\Blog.Contracts.Options\Blog.Contracts.Options.csproj" />
     <ProjectReference Include="..\Blog.Contracts.ViewModels\Blog.Contracts.ViewModels.csproj" />
     <ProjectReference Include="..\Blog.DataAccess.Providers\Blog.DataAccess.Providers.csproj" />

@@ -2,25 +2,25 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using BazarJok.Contracts.Dtos;
-using BazarJok.Contracts.ViewModels;
-using BazarJok.DataAccess.Models;
-using BazarJok.DataAccess.Providers;
+using GeekBlog.Contracts.Dtos;
+using GeekBlog.Contracts.ViewModels;
+using GeekBlog.DataAccess.Models;
+using GeekBlog.DataAccess.Providers;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Hosting;
 
-namespace BazarJok.Services.Business
+namespace GeekBlog.Services.Business
 {
     public class BlogService
     {
         private readonly BlogProvider _blogProvider;
         private readonly CategoryProvider _categoryProvider;
-        private readonly AdminProvider _adminProvider;
+        private readonly EntityAdminProvider _adminProvider;
         private readonly ImageProvider _imageProvider;
         private readonly IMemoryCache _cache;
         
 
-        public BlogService(BlogProvider blogProvider, CategoryProvider categoryProvider, AdminProvider adminProvider, ImageProvider imageProvider, IMemoryCache cache)
+        public BlogService(BlogProvider blogProvider, CategoryProvider categoryProvider, EntityAdminProvider adminProvider, ImageProvider imageProvider, IMemoryCache cache)
         {
             _blogProvider = blogProvider;
             _categoryProvider = categoryProvider;
