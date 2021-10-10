@@ -121,7 +121,7 @@ namespace Blog.Api.Blog
             {
                 o.AddPolicy(CorsOrigins.FrontPolicy, builder =>
                 {
-                    builder.WithOrigins("http://localhost:4343", "http://localhost:3000")
+                    builder.WithOrigins("https://blogpanel.netlify.app", "http://103.246.146.114:3000", "https://geeknhistory.kz")
                         .AllowAnyHeader()
                         .WithMethods("GET")
                         .WithMethods("POST")
@@ -130,7 +130,7 @@ namespace Blog.Api.Blog
 
                 o.AddPolicy(CorsOrigins.AdminPanelPolicy, builder =>
                 {
-                    builder.WithOrigins("http://localhost:4343")
+                    builder.WithOrigins("https://blogpanel.netlify.app")
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials();

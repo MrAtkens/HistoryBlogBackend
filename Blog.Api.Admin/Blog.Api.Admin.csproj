@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>BazarJok.Api.Admin</RootNamespace>
+    <UserSecretsId>72dc3464-8c18-4ef3-8fa7-1f0852eb77a5</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

@@ -2,7 +2,7 @@
 {
     public class MailOption
     {
-        public const string Mail = "2point.kz@gmail.com";
-        public const string Password = "PUSHUHKA%";
+        public const string Mail = "geeknhistory@gmail.com";
+        public const string Password = "ourpassionforhistoryisover9000";
     }
 }
